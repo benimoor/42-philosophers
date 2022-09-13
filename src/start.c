@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/26 17:47:27 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/13 20:47:27 by ergrigor         ###   ########.fr       */
+/*   Created: 2022/09/13 21:04:08 by ergrigor          #+#    #+#             */
+/*   Updated: 2022/09/13 21:05:11 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char *av[])
+void	start(t_settings	*rules)
 {
-	t_settings	*settings;
-
-	settings = malloc(sizeof(t_settings));
-	if ((ac == 6 || ac == 5) && validation(av, settings) == 0)
-		start(settings);
-	else
-		put_msg("Enter a valid arguments\n", 2, settings);
-	return (0);
+	print_time()
 }
