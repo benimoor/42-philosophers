@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:39:41 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/16 21:29:29 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/16 21:45:57 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_philo
 	t_settings			*rules;
 	pthread_mutex_t		*lfork;
 	pthread_mutex_t		*rfork;
+	int					eat_count;
 }	t_philo;
 
 size_t	ft_strlen(const char *str);

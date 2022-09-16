@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:04:08 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/16 21:39:51 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/16 22:11:46 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,50 @@ void	mutex_maker(t_settings *rules, pthread_mutex_t **mutexes)
 		// printf("%p\n", &mutex[--i]);
 	// return (mutex);
 }
+
+long long int    current_timestamp(void)
+{
+    struct timeval    te;
+
+    gettimeofday(&te, 0);
+    return (te.tv_sec * 1000LL + te.tv_usec / 1000);
+}
+
+
+void	print_action(char *str, t_philo *philo)
+{
+	pthread_mutex_lock(philo->rules->print);
+	printf("%lld %d %s\n",current_timestamp(), philo->index, str);
+	pthread_mutex_unlock(philo->rules->print);
+}
+
+void	get_philo_forks(t_philo	*philo)
+{
+			printf("%d\n", philo->index);
+	pthread_mutex_lock(philo->lfork);
+	print_action("has taken a fork\n", philo);
+	// printf("%d\n", philo->index);
+	pthread_mutex_lock(philo->rfork);
+	// print_action("has taken a fork\n", philo);
+}
+
+
 void	*life(void *gago)
 {
 	t_philo	*philo;
 	
 	philo = (t_philo *)gago;
-	pthread_mutex_lock(philo->rfork);
-	printf("Hello Gago\n");
-	pthread_mutex_unlock(philo->rfork);
+	if (philo->index % 2 == 0)
+		usleep(10);
+	printf("asdasdasd\n");
+	while (1)
+	{
+		get_philo_forks(philo);
+		// put fork
+		//sleep
+		//think
+	}
+
 
 	//pthread_mutex_unlock(philo->rules->print);
 	return 0;
@@ -64,6 +100,7 @@ t_philo	*create_philo(t_settings *rules, pthread_mutex_t **mutexes, int i, pthre
 	philo = malloc(sizeof(t_philo));
 	if (!philo)
 		put_msg("Philo create error", 2, rules);
+	philo->index = i;
 	philo->mode = 1;
 	philo->lfork = &mutex[i];
 	philo->rfork = &mutex[rfork(rules, i)];
@@ -95,6 +132,8 @@ void	destroy_mutexs(pthread_mutex_t **mutex, int i)
 	}
 	//free(mutex);
 }
+
+// int is_dead
 void	start(t_settings	*rules)
 {
 	t_philo			**philosophers;
@@ -117,5 +156,9 @@ void	start(t_settings	*rules)
 		i++;
 	}
 	destroy_mutexs(&mutexes, i - 1);
-	while (1);
+	while (1)
+	{ 
+		// if(is_dead(philosophers) < 0)//|| time is out
+		// 	detach_all_threads(thread); // need to write
+	}
 }
