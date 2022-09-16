@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:04:08 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/16 21:38:04 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/16 21:39:51 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ void	start(t_settings	*rules)
 	philosophers = malloc(sizeof(t_philo *) * rules->philo);
 	thread = malloc(rules->philo * sizeof(pthread_t));
 	mutexes = malloc(rules->philo * sizeof(pthread_mutex_t));
-	// if blaaa
+	if (!mutexes)
+		put_msg("Malloc Error", 2, rules);
 	mutex_maker(rules, &mutexes);
-		// printf("CHECK->%d\n", rules->philo);
 	if (!mutexes)
 		return ;
 	while (i < rules->philo)
