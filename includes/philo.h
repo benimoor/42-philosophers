@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:39:41 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/17 17:10:31 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:18:02 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_philo
 	pthread_mutex_t		*lfork;
 	pthread_mutex_t		*rfork;
 	int					eat_count;
+	long long int		last_eat_time;
 }	t_philo;
 
 size_t	ft_strlen(const char *str);
@@ -50,7 +51,8 @@ void	mutex_maker(t_settings *rules, pthread_mutex_t **mutexes);
 void	*life(void *gago);
 t_philo	*create_philo(t_settings *rules, pthread_mutex_t **mutex, int i, pthread_t *thread);
 //void	destroy_mutexs(pthread_mutex_t **mutex, int i);
-void	start(t_settings	*rules);
+int	start(t_settings	*rules);
+long long int    current_timestamp(void);
 
 
 #endif

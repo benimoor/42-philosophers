@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:04:08 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/17 17:38:16 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:20:21 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ void eat(t_philo	*philo)
 	print_action(" is eating\n", philo);
 	philo->eat_count += 1;
 	philo->mode = 2;
+	philo->last_eat_time = -1;
 	usleep(philo->rules->eat_time);
+	philo->last_eat_time = current_timestamp();
 }
 
 void	put_philo_forks(t_philo	*philo)
@@ -139,6 +141,7 @@ t_philo	*create_philo(t_settings *rules, pthread_mutex_t **mutexes, int i, pthre
 	philo->lfork = &mutex[i];
 	philo->rfork = &mutex[rfork(rules, i)];
 	philo->rules = rules;
+	philo->last_eat_time = -1;
 	i = 0;
 	if (pthread_create(&thread[i], NULL, life, (void *)philo) < 0)
 		put_msg("Philo create error", 2, rules);
@@ -176,14 +179,28 @@ int	check_if_all_eat(t_philo	**philosophers)
 	return (1);
 }
 
+int check_last_eat_time(t_philo	**philosophers)
+{
+	int i;
+	int res;
 
+	i = 0;
+	while (i  < philosophers[0]->rules->philo)
+	{
+		if (philosophers[i]->last_eat_time != -1 && current_timestamp() - philosophers[i]->last_eat_time > philosophers[i]->last_eat_time)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
 
-void	start(t_settings	*rules)
+int	start(t_settings	*rules)
 {
 	t_philo			**philosophers;
 	pthread_mutex_t	**mutexes;
 	pthread_t		*thread;
 	int				i;
+	int				check;
 
 	i = 0;
 	philosophers = malloc(sizeof(t_philo *) * rules->philo);
@@ -193,7 +210,7 @@ void	start(t_settings	*rules)
 		put_msg("Malloc Error", 2, rules);
 	mutex_maker(rules, mutexes);
 	if (!mutexes)
-		return ;
+		return -1;
 	while (i < rules->philo)
 	{
 		philosophers[i] = create_philo(rules, mutexes, i, thread);
@@ -207,12 +224,18 @@ void	start(t_settings	*rules)
 	}
 	while (1)
 	{ 
-		usleep(10);
+		// usleep(10);
 	
 		if (check_if_all_eat(philosophers) == 1)
 		{	
 			pthread_mutex_lock(&rules->print);
-			return ;
+			return -1;
+		}
+		check = check_last_eat_time(philosophers);
+		if (check != -1)
+		{
+			pthread_mutex_lock(&rules->print);
+			return check;
 		}
 	}
 	destroy_mutexs(mutexes, i - 1);
