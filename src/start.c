@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:04:08 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/17 16:58:59 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:38:16 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ long long int    current_timestamp(void)
 void	print_action(char *str, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->rules->print);
-	printf("%lld %d %s\n",current_timestamp(), philo->index + 1, str);
+	printf("%lld %d %s",current_timestamp(), philo->index + 1, str);
 	pthread_mutex_unlock(&philo->rules->print);
 }
 
@@ -54,16 +54,16 @@ void	get_philo_forks(t_philo	*philo)
 	if (philo->index + 1 == philo->rules->philo)
 	{
 		pthread_mutex_lock(philo->lfork);
-		print_action("has taken a fork\n", philo);
+		print_action(" has taken a fork\n", philo);
 		pthread_mutex_lock(philo->rfork);
-		print_action("has taken a fork\n", philo);
+		print_action(" has taken a fork\n", philo);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->rfork);
-		print_action("has taken a fork\n", philo);
+		print_action(" has taken a fork\n", philo);
 		pthread_mutex_lock(philo->lfork);
-		print_action("has taken a fork\n", philo);
+		print_action(" has taken a fork\n", philo);
 	}
 }
 
@@ -71,13 +71,22 @@ void eat(t_philo	*philo)
 {
 	print_action(" is eating\n", philo);
 	philo->eat_count += 1;
+	philo->mode = 2;
 	usleep(philo->rules->eat_time);
 }
 
 void	put_philo_forks(t_philo	*philo)
 {
-	pthread_mutex_unlock(philo->lfork);
-	pthread_mutex_unlock(philo->rfork);
+	if (philo->index + 1 == philo->rules->philo)
+	{
+		pthread_mutex_unlock(philo->rfork);
+		pthread_mutex_unlock(philo->lfork);
+	}
+	else
+	{
+		pthread_mutex_unlock(philo->lfork);
+		pthread_mutex_unlock(philo->rfork);
+	}
 }
 
 void	sleeping(t_philo	*philo)
@@ -159,23 +168,15 @@ int	check_if_all_eat(t_philo	**philosophers)
 	count_philo = philosophers[0]->rules->philo;
 	while (i < count_philo)
 	{
-		if (philosophers[0]->eat_count <  philosophers[0]->rules->eat_max_count)
+		if (philosophers[i]->eat_count <  philosophers[i]->rules->eat_max_count && philosophers[i]->rules->eat_max_count != -1)
 			return (-1);
+		else
+			i++;
 	}
 	return (1);
 }
 
-void detach_threads(pthread_t	*thread, int count)
-{
-	int i;
 
-	i = 0;
-	while (i < count)
-	{
-		pthread_detach(thread[i]);
-		i++;
-	}
-}
 
 void	start(t_settings	*rules)
 {
@@ -198,13 +199,20 @@ void	start(t_settings	*rules)
 		philosophers[i] = create_philo(rules, mutexes, i, thread);
 		i++;
 	}
+	i = 0;
+	while (i < 4)
+	{
+		pthread_detach(thread[i]);
+		i++;
+	}
 	while (1)
 	{ 
-		usleep(5);
+		usleep(10);
+	
 		if (check_if_all_eat(philosophers) == 1)
-		{
-			detach_threads(thread, rules->philo);
-			exit(0);
+		{	
+			pthread_mutex_lock(&rules->print);
+			return ;
 		}
 	}
 	destroy_mutexs(mutexes, i - 1);
