@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:58:58 by smikayel          #+#    #+#             */
-/*   Updated: 2022/09/17 22:35:46 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/17 23:13:08 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_if_all_eat(t_philo	**philosophers)
 		return (-1);
 	while (i < count_philo)
 	{
-		if (philosophers[i]->eat_count <  philosophers[i]->rules->eat_max_count)
+		if (philosophers[i]->eat_count == philosophers[i]->rules->eat_max_count)
 			return (1);
 		else
 			i++;
@@ -34,7 +34,6 @@ int	check_if_all_eat(t_philo	**philosophers)
 int check_last_eat_time(t_philo	**philosophers)
 {
 	int i;
-	int res;
 
 	i = 0;
 	while (i  < philosophers[0]->rules->philo)
