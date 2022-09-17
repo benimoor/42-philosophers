@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:21:30 by smikayel          #+#    #+#             */
-/*   Updated: 2022/09/17 18:22:26 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:19:41 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_philo	*create_philo(t_settings *rules, pthread_mutex_t **mutexes, int i, pthre
 	philo->lfork = &mutex[i];
 	philo->rfork = &mutex[rfork(rules, i)];
 	philo->rules = rules;
-	philo->last_eat_time = -1;
+	philo->last_eat_time = current_timestamp();
 	i = 0;
 	if (pthread_create(&thread[i], NULL, life, (void *)philo) < 0)
 		put_msg("Philo create error", 2, rules);
