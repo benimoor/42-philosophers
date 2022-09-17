@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:04:08 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/17 16:56:04 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/09/17 16:58:59 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,18 @@ int	check_if_all_eat(t_philo	**philosophers)
 	return (1);
 }
 
+void detach_threads(pthread_t	*thread, int count)
+{
+	int i;
+
+	i = 0;
+	while (i < count)
+	{
+		pthread_detach(thread[i]);
+		i++;
+	}
+}
+
 void	start(t_settings	*rules)
 {
 	t_philo			**philosophers;
@@ -191,10 +203,9 @@ void	start(t_settings	*rules)
 		usleep(5);
 		if (check_if_all_eat(philosophers) == 1)
 		{
-			printf("finished\n");
+			detach_threads(thread, rules->philo);
 			exit(0);
 		}
-		// detach_threads();
 	}
 	destroy_mutexs(mutexes, i - 1);
 }
