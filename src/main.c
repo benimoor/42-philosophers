@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:47:27 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/17 18:19:43 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:48:15 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char *av[])
 		{
 			res = start(settings);
 			if (res != -1)
-				printf("%lld %d is dead", current_timestamp(), res + 1);
+				printf("[%lld] [Philo N%d] is dead", current_timestamp(), res + 1);
 		}
 	else
 		put_msg("Enter a valid arguments\n", 2, settings);

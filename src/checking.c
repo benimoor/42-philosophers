@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:58:58 by smikayel          #+#    #+#             */
-/*   Updated: 2022/09/17 19:33:00 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/09/17 22:27:24 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_if_all_eat(t_philo	**philosophers)
 	while (i < count_philo)
 	{
 		if (philosophers[i]->eat_count <  philosophers[i]->rules->eat_max_count)
-			return (-1);
+			return (1);
 		i++;
 	}
 	return (-1);
@@ -39,9 +39,14 @@ int check_last_eat_time(t_philo	**philosophers)
 	while (i  < philosophers[0]->rules->philo)
 	{
 		if (philosophers[i]->last_eat_time != -1)
-			if (current_timestamp() - philosophers[i]->last_eat_time >= philosophers[i]->last_eat_time)
+		{
+			if ((int)(current_timestamp() - philosophers[i]->last_eat_time) >= philosophers[i]->rules->death_time && philosophers[i]->mode != 2)
 				return (i);
-		i++;
+		}
+		else
+		{
+			i++;
+		}
 	}
 	return (-1);
 }

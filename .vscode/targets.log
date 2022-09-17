@@ -6,8 +6,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Fri Sep 16 22:14:26 2022
+# Make data base, printed on Sat Sep 17 20:44:45 2022
 
 # Variables
 
@@ -27,7 +28,7 @@ VSCODE_LOG_NATIVE = false
 CURDIR := /Users/ergrigor/Desktop/philosophers
 # makefile
 SHELL = /bin/sh
-# makefile (from `Makefile', line 8)
+# makefile (from `Makefile', line 9)
 RM = rm -rf
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
@@ -37,14 +38,14 @@ _ = /usr/bin/make
 MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
-# makefile (from `Makefile', line 7)
+# makefile (from `Makefile', line 8)
 OBJS = $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cg3r0033ry/T/vscode-ipc-9bbfb72d-ccf1-4a2f-a310-d49e12112daf.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cg3r0033ry/T/vscode-ipc-28e05b06-62d2-49a7-a5af-ff33f6587dba.sock
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.5UoIK9Iev9/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.m5CPQzmSHe/Render
 # environment
 PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
@@ -58,7 +59,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.ByRauPpcBz/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.AmUIeCRp3u/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -85,7 +86,7 @@ ZSH = /Users/ergrigor/.oh-my-zsh
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
-# makefile (from `Makefile', line 9)
+# makefile (from `Makefile', line 10)
 MKDIR = mkdir -p
 # environment
 XPC_FLAGS = 0x0
@@ -93,7 +94,7 @@ XPC_FLAGS = 0x0
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
-# makefile (from `Makefile', line 6)
+# makefile (from `Makefile', line 7)
 SRCS = $(wildcard $(SRCS_DIR)/*.c)
 # environment
 SHLVL = 1
@@ -103,7 +104,7 @@ CC = cc
 MAKE_VERSION := 3.81
 # environment
 USER = ergrigor
-# makefile (from `Makefile', line 11)
+# makefile (from `Makefile', line 12)
 .DEFAULT_GOAL = all
 # makefile (from `Makefile', line 1)
 NAME = philo
@@ -128,7 +129,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.2576
+XPC_SERVICE_NAME = com.microsoft.VSCode.2388
 # makefile (from `Makefile', line 3)
 OBJS_DIR = objs
 # automatic
@@ -149,8 +150,8 @@ LC_ALL = C
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
-# makefile (from `Makefile', line 5)
-FLAGS = -Wall -Werror -Wextra -g -Iincludes 
+# makefile (from `Makefile', line 6)
+FLAGS = -g -Iincludes
 # default
 .INCLUDE_DIRS = /usr/local/include
 # environment
@@ -158,7 +159,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 2483
+VSCODE_PID = 13982
 # variable set hash-table stats:
 # Load=74/1024=7%, Rehash=0, Collisions=3/110=3%
 
@@ -169,14 +170,14 @@ VSCODE_PID = 2483
 # Directories
 
 # . (device 16777224, inode 1201263): 9 files, no impossibilities.
-# src (device 16777224, inode 1203073): 6 files, no impossibilities.
+# src (device 16777224, inode 1203073): 10 files, no impossibilities.
 
-# 15 files, no impossibilities in 2 directories.
+# 19 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 objs/%.o: src/%.c | objs
-#  commands to execute (from `Makefile', line 14):
+#  commands to execute (from `Makefile', line 15):
 	$(CC) $(FLAGS) -c $< -o $@
 	
 
@@ -187,12 +188,12 @@ objs/%.o: src/%.c | objs
 objs/main.o: src/main.c | objs
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `main'
-#  Last modified 2022-09-16 22:11:31
+#  Last modified 2022-09-17 20:41:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 14):
+#  commands to execute (from `Makefile', line 15):
 	$(CC) $(FLAGS) -c $< -o $@
 	
 
@@ -206,15 +207,27 @@ all: philo
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-philo: objs/main.o objs/start.o objs/utils1.o objs/validation.o | objs
+philo: objs/checking.o objs/init.o objs/life.o objs/life_cicle.o objs/main.o objs/start.o objs/utils1.o objs/validation.o | objs
 #  Implicit rule search has not been done.
-#  Last modified 2022-09-16 22:11:48
+#  Last modified 2022-09-17 20:41:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 22):
+#  commands to execute (from `Makefile', line 23):
 	$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(LINKERS)
+	
+
+objs/life.o: src/life.c | objs
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `life'
+#  Last modified 2022-09-17 20:41:17
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 15):
+	$(CC) $(FLAGS) -c $< -o $@
 	
 
 .PHONY: all clean fclean re bonus push
@@ -232,6 +245,15 @@ src/utils1.c:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
+src/checking.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-17 20:41:17
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
 .SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -242,7 +264,7 @@ push:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 35):
+#  commands to execute (from `Makefile', line 36):
 	@git add .
 	@git commit -m "$m"
 	@git push
@@ -251,7 +273,7 @@ push:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-16 18:52:55
+#  Last modified 2022-09-17 20:41:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -260,7 +282,7 @@ Makefile:
 # Not a target:
 src/validation.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-16 18:52:55
+#  Last modified 2022-09-17 20:41:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -269,7 +291,7 @@ src/validation.c:
 # Not a target:
 src/start.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-16 22:11:46
+#  Last modified 2022-09-17 20:41:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -277,10 +299,10 @@ src/start.c:
 
 objs:
 #  Implicit rule search has not been done.
-#  Last modified 2022-09-16 22:11:48
+#  Last modified 2022-09-17 20:41:17
 #  File has been updated.
 #  Successfully updated.
-#  commands to execute (from `Makefile', line 17):
+#  commands to execute (from `Makefile', line 18):
 	$(MKDIR) $(OBJS_DIR)
 	
 
@@ -295,18 +317,52 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 30):
+#  commands to execute (from `Makefile', line 31):
 	$(RM) $(NAME)
 	
 
 # Not a target:
 src/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-16 22:11:30
+#  Last modified 2022-09-17 20:41:17
+#  File has been updated.
+#  Successfully updated.
+ 
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/init.o: src/init.c | objs
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `init'
+#  Last modified 2022-09-17 20:41:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 15):
+	$(CC) $(FLAGS) -c $< -o $@
+	
+
+# Not a target:
+src/life.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-17 20:41:17
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/life_cicle.o: src/life_cicle.c | objs
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `life_cicle'
+#  Last modified 2022-09-17 20:41:17
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 15):
+	$(CC) $(FLAGS) -c $< -o $@
+	
 
 # Not a target:
 .DEFAULT:
@@ -320,54 +376,83 @@ re: fclean all
 #  File does not exist.
 #  File has not been updated.
 
- 
 clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 27):
+#  commands to execute (from `Makefile', line 28):
 	$(RM) $(OBJS_DIR)
 	
 
 objs/utils1.o: src/utils1.c | objs
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `utils1'
-#  Last modified 2022-09-16 20:31:03
+#  Last modified 2022-09-17 20:41:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 14):
+#  commands to execute (from `Makefile', line 15):
+	$(CC) $(FLAGS) -c $< -o $@
+	
+
+objs/checking.o: src/checking.c | objs
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `checking'
+#  Last modified 2022-09-17 20:41:17
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 15):
 	$(CC) $(FLAGS) -c $< -o $@
 	
 
 objs/validation.o: src/validation.c | objs
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `validation'
-#  Last modified 2022-09-16 20:24:37
+#  Last modified 2022-09-17 20:41:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 14):
+#  commands to execute (from `Makefile', line 15):
 	$(CC) $(FLAGS) -c $< -o $@
 	
 
 objs/start.o: src/start.c | objs
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `start'
-#  Last modified 2022-09-16 22:11:48
+#  Last modified 2022-09-17 20:41:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 14):
+#  commands to execute (from `Makefile', line 15):
 	$(CC) $(FLAGS) -c $< -o $@
 	
 
+# Not a target:
+src/init.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-17 20:41:17
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+src/life_cicle.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-17 20:41:17
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 # files hash-table stats:
-# Load=20/1024=2%, Rehash=0, Collisions=0/69=0%
+# Load=28/1024=3%, Rehash=0, Collisions=0/101=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -379,6 +464,6 @@ objs/start.o: src/start.c | objs
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Sep 16 22:14:26 2022
+# Finished Make data base on Sat Sep 17 20:44:45 2022
 
  

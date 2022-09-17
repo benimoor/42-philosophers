@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:57:02 by smikayel          #+#    #+#             */
-/*   Updated: 2022/09/17 19:00:41 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:29:13 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ long long int    current_timestamp(void)
 void	print_action(char *str, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->rules->print);
-	printf("%lld %d %s",current_timestamp(), philo->index + 1, str);
+	printf("[%lld] [Philo N%d] %s",current_timestamp(), philo->index + 1, str);
 	pthread_mutex_unlock(&philo->rules->print);
 }
 

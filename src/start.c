@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:04:08 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/17 19:36:02 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/09/17 22:20:14 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	start(t_settings	*rules)
 		i++;
 	}
 	i = 0;
-	while (i < 4)
+	while (i < rules->philo)
 	{
 		pthread_detach(thread[i]);
 		i++;
 	}
 	while (1)
 	{ 
-		usleep(8);
+		usleep(philosophers[0]->rules->eat_time);
 	
 		if (check_if_all_eat(philosophers) == 1)
 		{	
