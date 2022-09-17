@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
+/*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:39:41 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/16 21:45:57 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/17 15:23:22 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 
 typedef struct s_settings
 {
-	int	philo;
-	int	death_time;
-	int	sleep_time;
-	int	eat_time;
-	int	eat_max_count;
-	pthread_mutex_t		*print;
+	int					philo;
+	int					death_time;
+	int					sleep_time;
+	int					eat_time;
+	int					eat_max_count;
+	pthread_mutex_t		print;
 }	t_settings;
 
 typedef struct s_philo

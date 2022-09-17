@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
+/*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:04:08 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/16 22:11:46 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/17 16:56:04 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,16 @@ int	rfork(t_settings *rules, int index)
 
 void	mutex_maker(t_settings *rules, pthread_mutex_t **mutexes)
 {
-	pthread_mutex_t	*mutex;
 	int				i;
 
 	i = 0;
-	mutex = *mutexes;
-	// mutex = malloc(sizeof(pthread_mutex_t) * rules->philo);
-	if (!mutex)
-		put_msg("Malloc Error", 2, rules);
 	while (i < rules->philo)
 	{
-		if (pthread_mutex_init(&mutex[i], NULL) < 0)
-		{
-			free(mutex);
+		mutexes[i] = malloc(sizeof(pthread_mutex_t));
+		if (pthread_mutex_init(mutexes[i], NULL) < 0)
 			put_msg("Mutex Error", 2, rules);
-		}
 		i++;
 	}
-	// while(i > 0)
-		// printf("%p\n", &mutex[--i]);
-	// return (mutex);
 }
 
 long long int    current_timestamp(void)
@@ -54,40 +44,75 @@ long long int    current_timestamp(void)
 
 void	print_action(char *str, t_philo *philo)
 {
-	pthread_mutex_lock(philo->rules->print);
-	printf("%lld %d %s\n",current_timestamp(), philo->index, str);
-	pthread_mutex_unlock(philo->rules->print);
+	pthread_mutex_lock(&philo->rules->print);
+	printf("%lld %d %s\n",current_timestamp(), philo->index + 1, str);
+	pthread_mutex_unlock(&philo->rules->print);
 }
 
 void	get_philo_forks(t_philo	*philo)
 {
-			printf("%d\n", philo->index);
-	pthread_mutex_lock(philo->lfork);
-	print_action("has taken a fork\n", philo);
-	// printf("%d\n", philo->index);
-	pthread_mutex_lock(philo->rfork);
-	// print_action("has taken a fork\n", philo);
+	if (philo->index + 1 == philo->rules->philo)
+	{
+		pthread_mutex_lock(philo->lfork);
+		print_action("has taken a fork\n", philo);
+		pthread_mutex_lock(philo->rfork);
+		print_action("has taken a fork\n", philo);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->rfork);
+		print_action("has taken a fork\n", philo);
+		pthread_mutex_lock(philo->lfork);
+		print_action("has taken a fork\n", philo);
+	}
 }
 
+void eat(t_philo	*philo)
+{
+	print_action(" is eating\n", philo);
+	philo->eat_count += 1;
+	usleep(philo->rules->eat_time);
+}
+
+void	put_philo_forks(t_philo	*philo)
+{
+	pthread_mutex_unlock(philo->lfork);
+	pthread_mutex_unlock(philo->rfork);
+}
+
+void	sleeping(t_philo	*philo)
+{
+	print_action(" is sleeping\n", philo);
+	philo->mode = 3;
+	usleep(philo->rules->sleep_time);
+}
+
+void	thinking(t_philo	*philo)
+{
+	print_action(" is thinking\n", philo);
+	philo->mode = 1;
+}
 
 void	*life(void *gago)
 {
 	t_philo	*philo;
-	
+
 	philo = (t_philo *)gago;
 	if (philo->index % 2 == 0)
 		usleep(10);
-	printf("asdasdasd\n");
 	while (1)
 	{
-		get_philo_forks(philo);
-		// put fork
-		//sleep
-		//think
+		if (philo->mode == 1)
+		{
+			get_philo_forks(philo);
+			eat(philo);
+			put_philo_forks(philo);
+		}
+		if (philo->mode == 2)
+			sleeping(philo);
+		if (philo->mode == 3)
+			thinking(philo);
 	}
-
-
-	//pthread_mutex_unlock(philo->rules->print);
 	return 0;
 }
 
@@ -104,7 +129,7 @@ t_philo	*create_philo(t_settings *rules, pthread_mutex_t **mutexes, int i, pthre
 	philo->mode = 1;
 	philo->lfork = &mutex[i];
 	philo->rfork = &mutex[rfork(rules, i)];
-		printf("left -> %d\t|\trigth ->%d\n", i, rfork(rules, i));
+	philo->rules = rules;
 	i = 0;
 	if (pthread_create(&thread[i], NULL, life, (void *)philo) < 0)
 		put_msg("Philo create error", 2, rules);
@@ -118,47 +143,58 @@ void	destroy_mutexs(pthread_mutex_t **mutex, int i)
 	pthread_mutex_t	*curr;
 
 	curr = *mutex;
-	pthread_mutex_destroy(curr);
-	// pthread_mutex_destroy(mutex[2]);
-	// pthread_mutex_destroy(mutex[3]);
-	// pthread_mutex_destroy(mutex[2]);
 	while (i >= l)
 	{
-	// 	printf("Ayo Gago-----%d\n", i);
 		pthread_mutex_destroy(&curr[l]);
-	// 	l++;
-	// 	printf("Ayo Gago---L--%d\n", l);
 		l++;
 	}
-	//free(mutex);
 }
 
-// int is_dead
+int	check_if_all_eat(t_philo	**philosophers)
+{
+	int i;
+	int count_philo;
+
+	i = 0;
+	count_philo = philosophers[0]->rules->philo;
+	while (i < count_philo)
+	{
+		if (philosophers[0]->eat_count <  philosophers[0]->rules->eat_max_count)
+			return (-1);
+	}
+	return (1);
+}
+
 void	start(t_settings	*rules)
 {
 	t_philo			**philosophers;
-	pthread_mutex_t	*mutexes;
+	pthread_mutex_t	**mutexes;
 	pthread_t		*thread;
 	int				i;
 
 	i = 0;
 	philosophers = malloc(sizeof(t_philo *) * rules->philo);
 	thread = malloc(rules->philo * sizeof(pthread_t));
-	mutexes = malloc(rules->philo * sizeof(pthread_mutex_t));
+	mutexes = malloc(rules->philo * sizeof(pthread_mutex_t *));
 	if (!mutexes)
 		put_msg("Malloc Error", 2, rules);
-	mutex_maker(rules, &mutexes);
+	mutex_maker(rules, mutexes);
 	if (!mutexes)
 		return ;
 	while (i < rules->philo)
 	{
-		philosophers[i] = create_philo(rules, &mutexes, i, thread);
+		philosophers[i] = create_philo(rules, mutexes, i, thread);
 		i++;
 	}
-	destroy_mutexs(&mutexes, i - 1);
 	while (1)
 	{ 
-		// if(is_dead(philosophers) < 0)//|| time is out
-		// 	detach_all_threads(thread); // need to write
+		usleep(5);
+		if (check_if_all_eat(philosophers) == 1)
+		{
+			printf("finished\n");
+			exit(0);
+		}
+		// detach_threads();
 	}
+	destroy_mutexs(mutexes, i - 1);
 }

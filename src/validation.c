@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
+/*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:29:47 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/13 20:47:24 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/17 16:41:35 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int	validation(char *av[], t_settings *settings)
 	settings->sleep_time = ft_atoi(av[4], settings);
 	if (av[5])
 		settings->eat_max_count = ft_atoi(av[5], settings);
+	else
+		settings->eat_max_count = -1;
 	return (0);
 }
