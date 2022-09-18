@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:04:08 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/17 22:20:14 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/18 14:40:54 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int	start(t_settings	*rules)
 	}
 	while (1)
 	{ 
-		usleep(philosophers[0]->rules->eat_time);
-	
 		if (check_if_all_eat(philosophers) == 1)
 		{	
 			pthread_mutex_lock(&rules->print);
