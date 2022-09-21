@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:21:30 by smikayel          #+#    #+#             */
-/*   Updated: 2022/09/21 18:28:55 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:29:37 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@ void	my_usleep(int ms)
 
 	while (current_timestamp() - start_sleep < ms)
 	;
-	// struct timeval start;
-	// struct timeval now;
-	// gettimeofday(&start, 0);
-	// gettimeofday(&now, 0);
-	// while((now.tv_sec - start.tv_sec) * 1000 + (now.tv_usec - start.tv_usec) / 1000 <= ms)
-	// {
-	// 	usleep(10);
-	// 	gettimeofday(&now,0);
-	// }
 }
 
 void	create_philo(t_philo *philo, pthread_mutex_t *mutexes)
@@ -54,8 +45,6 @@ void	*life(void *philo)
 	
 	((t_philo*)philo)->rules->start_time = current_timestamp();
 	while (1)
-	{
 		eat(philo);
-	}
 	return 0;
 }

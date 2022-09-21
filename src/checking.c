@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:58:58 by smikayel          #+#    #+#             */
-/*   Updated: 2022/09/21 18:40:09 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:31:56 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,7 @@ int check_last_eat_time(t_philo	*philosophers)
 	{
 		time = current_timestamp();
 		if ((time - philosophers[i].last_eat_time) >= philosophers[0].rules->death_time/* && philosophers[i].mode != 2*/)
-		{
-			printf("\nPhilosopher is --> %d\nMode is --> %d\nStart time is --> %lld\nDeath time is --> %lld\n",i
-			, philosophers[i].mode, philosophers[i].rules->start_time, philosophers[i].last_eat_time,philosophers[i].rules->death_time);
 			return (i);
-		}
 		i++;
 	}
 	return (-1);
