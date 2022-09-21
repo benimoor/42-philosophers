@@ -3,66 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   life_cicle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:22:37 by smikayel          #+#    #+#             */
-/*   Updated: 2022/09/17 19:32:17 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/09/21 18:20:06 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	get_philo_forks(t_philo	*philo)
-{
-	if (philo->index + 1 == philo->rules->philo)
-	{
-		pthread_mutex_lock(philo->lfork);
-		print_action(" has taken a fork\n", philo);
-		pthread_mutex_lock(philo->rfork);
-		print_action(" has taken a fork\n", philo);
-	}
-	else
-	{
-		pthread_mutex_lock(philo->rfork);
-		print_action(" has taken a fork\n", philo);
-		pthread_mutex_lock(philo->lfork);
-		print_action(" has taken a fork\n", philo);
-	}
-}
-
 void eat(t_philo	*philo)
 {
-	print_action(" is eating\n", philo);
+	pthread_mutex_lock(philo->lfork);
+	print_action(" has taken a fork\n", philo);
+	pthread_mutex_lock(philo->rfork);
+	print_action(" has taken a fork\n", philo);
 	philo->eat_count += 1;
-	philo->mode = 2;
-	philo->last_eat_time = -1;
-	usleep(philo->rules->eat_time);
+	// philo->mode = 2;
 	philo->last_eat_time = current_timestamp();
-}
-
-void	put_philo_forks(t_philo	*philo)
-{
-	if (philo->index + 1 == philo->rules->philo)
-	{
-		pthread_mutex_unlock(philo->rfork);
-		pthread_mutex_unlock(philo->lfork);
-	}
-	else
-	{
-		pthread_mutex_unlock(philo->lfork);
-		pthread_mutex_unlock(philo->rfork);
-	}
+	printf("\n%lld\n", philo->last_eat_time);
+	print_action(" is eating\n", philo);
+	my_usleep((int)(philo->rules->eat_time));
+	pthread_mutex_unlock(philo->rfork);
+	pthread_mutex_unlock(philo->lfork);
+	printf("\nUnlock -> %d  %lld\n", philo->index, current_timestamp());
+	sleeping(philo);
 }
 
 void	sleeping(t_philo	*philo)
 {
 	print_action(" is sleeping\n", philo);
-	philo->mode = 3;
-	usleep(philo->rules->sleep_time);
+	// philo->mode = 3;
+	my_usleep((int)(philo->rules->sleep_time));
+	thinking(philo);
 }
 
 void	thinking(t_philo	*philo)
 {
 	print_action(" is thinking\n", philo);
-	philo->mode = 1;
+	// philo->mode = 1;
+	eat(philo);
 }
