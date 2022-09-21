@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:39:41 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/21 15:23:18 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:58:51 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ typedef struct s_settings
 	long long int					eat_time;
 	long long int					eat_max_count;
 	long long int					start_time;
-	pthread_mutex_t		*print;
+	pthread_mutex_t					*print;
 }	t_settings;
 
 typedef struct s_philo
 {
 	int					index;
-	int					mode;
 	t_settings			*rules;
 	pthread_mutex_t		*lfork;
 	pthread_mutex_t		*rfork;
@@ -48,7 +47,8 @@ int					ft_atoi(const char *str, t_settings *settings);
 void				my_usleep(int ms);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					validation(char *av[], t_settings *settings);
-void				mutex_maker(t_settings *rules, pthread_mutex_t **mutexes, t_philo **philosophers, pthread_mutex_t **print);
+void				mutex_maker(t_settings *rules, pthread_mutex_t **mutexes,
+						t_philo **philosophers, pthread_mutex_t **print);
 void				*life(void *gago);
 void				create_philo(t_philo *philo, pthread_mutex_t *mutexes);
 int					start(t_settings	*rules);

@@ -6,23 +6,25 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:21:30 by smikayel          #+#    #+#             */
-/*   Updated: 2022/09/21 20:29:37 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:43:39 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
 void	my_usleep(int ms)
 {
-	double start_sleep = current_timestamp();
+	double	start_sleep;
 
+	start_sleep = current_timestamp();
 	while (current_timestamp() - start_sleep < ms)
-	;
+		;
 }
 
 void	create_philo(t_philo *philo, pthread_mutex_t *mutexes)
 {
-	int i;
-	pthread_t thread;
+	int			i;
+	pthread_t	thread;
 
 	i = 0;
 	while (i < philo->rules->philo)
@@ -40,11 +42,10 @@ void	create_philo(t_philo *philo, pthread_mutex_t *mutexes)
 
 void	*life(void *philo)
 {
-	if (((t_philo*)philo)->index % 2 == 0)
+	if (((t_philo *)philo)->index % 2 == 0)
 		usleep(100);
-	
-	((t_philo*)philo)->rules->start_time = current_timestamp();
+	((t_philo *)philo)->rules->start_time = current_timestamp();
 	while (1)
 		eat(philo);
-	return 0;
+	return (0);
 }

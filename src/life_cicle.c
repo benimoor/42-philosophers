@@ -6,13 +6,13 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:22:37 by smikayel          #+#    #+#             */
-/*   Updated: 2022/09/21 20:30:21 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:58:10 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void eat(t_philo	*philo)
+void	eat(t_philo	*philo)
 {
 	pthread_mutex_lock(philo->lfork);
 	print_action(" has taken a fork\n", philo);
