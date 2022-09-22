@@ -1,5 +1,15 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/ergrigor/Desktop/philosophers'
-make: Nothing to be done for `all'.
+mkdir -p objs
+cc -Wall -Werror -Wextra -g -Iincludes  -c src/checking.c -o objs/checking.o
+ 
+cc -Wall -Werror -Wextra -g -Iincludes  -c src/init.c -o objs/init.o
+cc -Wall -Werror -Wextra -g -Iincludes  -c src/life.c -o objs/life.o
+cc -Wall -Werror -Wextra -g -Iincludes  -c src/life_cicle.c -o objs/life_cicle.o
+cc -Wall -Werror -Wextra -g -Iincludes  -c src/main.c -o objs/main.o
+cc -Wall -Werror -Wextra -g -Iincludes  -c src/start.c -o objs/start.o
+cc -Wall -Werror -Wextra -g -Iincludes  -c src/utils1.c -o objs/utils1.o
+cc -Wall -Werror -Wextra -g -Iincludes  -c src/validation.c -o objs/validation.o
+cc -Wall -Werror -Wextra -g -Iincludes  -o philo  objs/checking.o  objs/init.o  objs/life.o  objs/life_cicle.o  objs/main.o  objs/start.o  objs/utils1.o  objs/validation.o 
 make: Leaving directory `/Users/ergrigor/Desktop/philosophers'
  

@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:47:27 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/21 20:44:00 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/22 23:00:20 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	main(int ac, char *av[])
 				current_timestamp() - settings->start_time, res + 1);
 	}
 	else
+	{
 		put_msg("Enter a valid arguments\n", 2, settings);
+		return (-1);
+	}
 	pthread_mutex_destroy(settings->print);
 	return (0);
 }

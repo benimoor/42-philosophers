@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:57:02 by smikayel          #+#    #+#             */
-/*   Updated: 2022/09/21 20:58:04 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/22 22:16:17 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,18 @@ int	rfork(t_settings *rules, int index)
 	return (index + 1);
 }
 
-void	mutex_maker(t_settings *rules, pthread_mutex_t **mutexes,
+int	mutex_maker(t_settings *rules, pthread_mutex_t **mutexes,
 	t_philo **philosophers, pthread_mutex_t **print)
 {
 	*mutexes = malloc(sizeof(pthread_mutex_t) * rules->philo);
 	*print = malloc(sizeof(pthread_mutex_t));
 	*philosophers = malloc(sizeof(t_philo) * rules->philo);
 	if (!*mutexes || !*philosophers || !*print)
+	{
 		put_msg("Malloc Error", 2, rules);
+		return (-1);
+	}
+	return (0);
 }
 
 long long int	current_timestamp(void)

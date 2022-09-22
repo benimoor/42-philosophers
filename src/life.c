@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:21:30 by smikayel          #+#    #+#             */
-/*   Updated: 2022/09/21 20:43:39 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/22 22:56:24 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	my_usleep(int ms)
 		;
 }
 
-void	create_philo(t_philo *philo, pthread_mutex_t *mutexes)
+int	create_philo(t_philo *philo, pthread_mutex_t *mutexes)
 {
 	int			i;
 	pthread_t	thread;
@@ -34,10 +34,14 @@ void	create_philo(t_philo *philo, pthread_mutex_t *mutexes)
 		philo[i].rfork = &mutexes[rfork(philo->rules, i)];
 		philo[i].last_eat_time = current_timestamp();
 		if (pthread_create(&thread, NULL, life, (void *)&(philo[i])) < 0)
+		{
 			put_msg("Philo create error", 2, philo->rules);
+			return (-1);
+		}
 		pthread_detach(thread);
 		i++;
 	}
+	return (0);
 }
 
 void	*life(void *philo)

@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:43:00 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/16 20:30:20 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/22 22:30:36 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ void	put_msg(char *str, int fd, t_settings *settings)
 {
 	write(fd, str, (int)(ft_strlen(str)));
 	if (fd == 2)
-	{
 		free(settings);
-		exit(0);
-	}
 }
 
 int	ft_atoi(const char *str, t_settings *settings)

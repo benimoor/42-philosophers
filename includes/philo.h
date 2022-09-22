@@ -6,7 +6,7 @@
 /*   By: ergrigor < ergrigor@student.42yerevan.am > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 17:39:41 by ergrigor          #+#    #+#             */
-/*   Updated: 2022/09/21 20:58:51 by ergrigor         ###   ########.fr       */
+/*   Updated: 2022/09/22 22:23:50 by ergrigor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int					ft_atoi(const char *str, t_settings *settings);
 void				my_usleep(int ms);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					validation(char *av[], t_settings *settings);
-void				mutex_maker(t_settings *rules, pthread_mutex_t **mutexes,
+int					mutex_maker(t_settings *rules, pthread_mutex_t **mutexes,
 						t_philo **philosophers, pthread_mutex_t **print);
 void				*life(void *gago);
-void				create_philo(t_philo *philo, pthread_mutex_t *mutexes);
+int					create_philo(t_philo *philo, pthread_mutex_t *mutexes);
 int					start(t_settings	*rules);
 long long int		current_timestamp(void);
 int					rfork(t_settings *rules, int index);
